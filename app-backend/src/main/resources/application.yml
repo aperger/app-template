@@ -24,9 +24,7 @@ spring:
             user-name-attribute: preferred_username
   thymeleaf:
     cache: false
-server:
-  jetty:
-    max-http-form-post-size:
+
 
 
 
