@@ -11,8 +11,8 @@ spring:
           PSSecurity:
             # https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2
             # https://developers.redhat.com/articles/2022/12/07/how-implement-single-sign-out-keycloak-spring-boot#keycloak_configuration
-            client-id: ~
-            client-secret: ~
+            client-id: ${OAUTH_CLIENT_ID}
+            client-secret: ${OAUTH_CLIENT_SECRET}
             scope: roles, email, profile
             authorization-grant-type: authorization_code
             redirect-uri: ${keycloak.application-url}/login/oauth2/code/pssecurity
