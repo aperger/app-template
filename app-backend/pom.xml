@@ -11,28 +11,27 @@
   <artifactId>app-backend</artifactId>  
   <version>${parent.version}</version>  
   <description>Application Template fot OAuth client</description>  
-
   <dependencies> 
     <dependency> 
       <groupId>org.springframework.boot</groupId>  
       <artifactId>spring-boot-starter-web</artifactId> 
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-    <dependency>
+    </dependency>  
+    <dependency> 
+      <groupId>org.springframework.boot</groupId>  
+      <artifactId>spring-boot-starter-security</artifactId> 
+    </dependency>  
+    <dependency> 
       <groupId>org.springframework.boot</groupId>  
       <artifactId>spring-boot-starter-oauth2-client</artifactId> 
-    </dependency>
+    </dependency>  
     <dependency> 
       <groupId>org.springframework.boot</groupId>  
       <artifactId>spring-boot-starter-thymeleaf</artifactId> 
-    </dependency>
-	<dependency>
-	  <groupId>org.springframework.boot</groupId>
-	  <artifactId>spring-boot-starter-actuator</artifactId>
-	</dependency>
+    </dependency>  
+    <dependency> 
+      <groupId>org.springframework.boot</groupId>  
+      <artifactId>spring-boot-starter-actuator</artifactId> 
+    </dependency>  
     <dependency> 
       <groupId>hu.ps.templates</groupId>  
       <artifactId>app-frontend</artifactId>  
@@ -44,20 +43,19 @@
       <scope>test</scope> 
     </dependency> 
   </dependencies>  
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>repackage</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+  <build> 
+    <plugins> 
+      <plugin> 
+        <groupId>org.springframework.boot</groupId>  
+        <artifactId>spring-boot-maven-plugin</artifactId>  
+        <executions> 
+          <execution> 
+            <goals> 
+              <goal>repackage</goal> 
+            </goals> 
+          </execution> 
+        </executions> 
+      </plugin>  
       <!--plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
@@ -71,37 +69,35 @@
             </goals>
           </execution>
         </executions>
-      </plugin-->
-
-      <plugin>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-webapp-maven-plugin</artifactId>
-        <version>2.5.0</version>
-        <configuration>
-          <schemaVersion>v2</schemaVersion>
-          <subscriptionId>007a098e-914a-4dbc-9d98-2daca5554916</subscriptionId>
-		  <resourceGroup>spring_rg</resourceGroup>
-          <appName>ps-app-template</appName>
-          <pricingTier>P1v2</pricingTier>
-          <region>westeurope</region>
-          <runtime>
-            <os>Linux</os>
-            <javaVersion>Java 17</javaVersion>
-            <webContainer>Java SE</webContainer>
-          </runtime>
-          <deployment>
-            <resources>
-              <resource>
-                <directory>${project.basedir}/target</directory>
-                <includes>
-                  <include>*.jar</include>
-                </includes>
-              </resource>
-
-            </resources>
-          </deployment>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+      </plugin-->  
+      <plugin> 
+        <groupId>com.microsoft.azure</groupId>  
+        <artifactId>azure-webapp-maven-plugin</artifactId>  
+        <version>2.5.0</version>  
+        <configuration> 
+          <schemaVersion>v2</schemaVersion>  
+          <subscriptionId>007a098e-914a-4dbc-9d98-2daca5554916</subscriptionId>  
+          <resourceGroup>spring_rg</resourceGroup>  
+          <appName>ps-app-template</appName>  
+          <pricingTier>F1</pricingTier>  
+          <region>westeurope</region>  
+          <runtime> 
+            <os>Linux</os>  
+            <javaVersion>Java 17</javaVersion>  
+            <webContainer>Java SE</webContainer> 
+          </runtime>  
+          <deployment> 
+            <resources> 
+              <resource> 
+                <directory>${project.basedir}/target</directory>  
+                <includes> 
+                  <include>*.jar</include> 
+                </includes> 
+              </resource> 
+            </resources> 
+          </deployment> 
+        </configuration> 
+      </plugin> 
+    </plugins> 
+  </build> 
 </project>
