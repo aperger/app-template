@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { UserProfileService } from '../user-profile.service';
+import { UserProfileService } from '../services/user-profile.service';
+import { ResourceServerService } from '../services/resource-server.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-navigation',
@@ -17,6 +19,15 @@ export class NavigationComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, public userProfileService: UserProfileService) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver, 
+    public userProfileService: UserProfileService, 
+    private resourceServer: ResourceServerService) {}
 
+  onClickResourceServer() {
+    this.resourceServer.getText("/").subscribe({
+      next: (value: string) => window.alert(value),
+      error: (error: HttpErrorResponse) => console.error(error)
+    });
+  }
 }

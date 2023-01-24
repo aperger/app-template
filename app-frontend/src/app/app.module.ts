@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable, take } from 'rxjs';
-import { UserProfile, UserProfileService } from './user-profile.service';
+import { UserProfile, UserProfileService } from './services/user-profile.service';
 
 
 function initializeAppFactory(service: UserProfileService): () => Observable<UserProfile> {

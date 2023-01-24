@@ -15,8 +15,6 @@ export interface UserProfile {
 })
 export class UserProfileService {
 
-  public userProfile: UserProfile | null = null;
-
   private subject = new BehaviorSubject<UserProfile | null>(null);
   public readonly profile$: Observable<UserProfile> = this.subject.asObservable().pipe(
     filter(profile => !!profile),

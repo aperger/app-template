@@ -26,7 +26,7 @@ public class UiSecurityConfig {
 
         final String successLogoutUrl = keyCloakRealm + "/protocol/openid-connect/logout?redirect_uri=" + applicationUrl + "/login";
 
-        http.authorizeHttpRequests()
+        http.cors().and().authorizeHttpRequests()
                 .requestMatchers("/favicon.ico").permitAll()
                 .requestMatchers("/*.js").permitAll()
                 .requestMatchers("/*.css").permitAll()
