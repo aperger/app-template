@@ -17,25 +17,34 @@ import java.util.Map;
 public class UserInfoController {
 
     @GetMapping("/profile/me")
-    public ResponseEntity<Map<String, Object>> getUserProfile(
-            @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient client,
-            Authentication authentication) {
+    public ResponseEntity<Map<String, Object>> getUserProfile(Authentication authentication) {
         OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
         if (oauthToken == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
-
-        String token = client.getAccessToken().getTokenValue();
-
         var result = new HashMap<String, Object>();
         result.put("username", oauthToken.getName());
-        result.put("acccessToken", token);
         result.put("email", oauthToken.getPrincipal().getAttributes().get("email"));
         String locale = oauthToken.getPrincipal().getAttributes().get("locale").toString();
         var given_name = oauthToken.getPrincipal().getAttributes().get("given_name");
         var family_name = oauthToken.getPrincipal().getAttributes().get("family_name");
         var fullName = "hu".equalsIgnoreCase(locale) ? family_name + " " + given_name : given_name + ", " + family_name;
         result.put("fullName", fullName);
+        return ResponseEntity.ok(result);
+    }
+
+
+    @GetMapping("/profile/token")
+    public ResponseEntity<Map<String, Object>> getUserAccessToken(@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient client) {
+        if (client == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
+
+        String token = client.getAccessToken().getTokenValue();
+        var expires = client.getAccessToken().getExpiresAt();
+        var result = new HashMap<String, Object>();
+        result.put("accessToken", token);
+        result.put("tokenExpires", expires);
         return ResponseEntity.ok(result);
     }
 }

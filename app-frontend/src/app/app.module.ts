@@ -11,12 +11,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable, take } from 'rxjs';
-import { UserProfile, UserProfileService } from './services/user-profile.service';
+import { UserProfile, UserService } from './services/user.service';
 
 
-function initializeAppFactory(service: UserProfileService): () => Observable<UserProfile> {
+function initializeAppFactory(service: UserService): () => Observable<UserProfile> {
+  // service.updateAccessToken();
   service.fetchProfile(); // fetch profile and wait for it
   return () => service.profile$.pipe(take(1)); // take the first only
  }
@@ -36,12 +38,13 @@ function initializeAppFactory(service: UserProfileService): () => Observable<Use
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatCardModule,
   ],
   providers: [{
     provide: APP_INITIALIZER,
-    useFactory: (service: UserProfileService) => initializeAppFactory(service),
-    deps: [UserProfileService],
+    useFactory: (service: UserService) => initializeAppFactory(service),
+    deps: [UserService],
     multi: true
   }],
   bootstrap: [AppComponent],

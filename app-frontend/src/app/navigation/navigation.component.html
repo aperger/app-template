@@ -5,7 +5,6 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
       <a mat-list-item (click)="onClickResourceServer()">Call resource server</a>
       <a mat-list-item href="logout">Logout</a>
     </mat-nav-list>
@@ -20,8 +19,41 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span> {{ 'Template application - Welcome ' + (userProfileService.profile$ | async)?.fullName }}</span>
+      <span> {{ 'Template application - Welcome ' + (userService.profile$ | async)?.fullName }}</span>
     </mat-toolbar>
     <!-- Add Content Here -->
+
+    <mat-card style="margin: 50px;">
+      <mat-card-content>
+          <mat-list>
+              <mat-list-item>
+                <span matListItemTitle>Message from resource server:</span>
+                <span matListItemLine> {{ message }}</span>
+              </mat-list-item>
+            </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card style="margin: 50px;">
+      <mat-card-content>
+          <mat-list>
+              <mat-list-item>
+                <span matListItemTitle>Username:</span>
+                <span matListItemLine> {{ (userService.profile$ | async)?.username }}</span>
+              </mat-list-item>
+              <mat-list-item>
+                  <span matListItemTitle>Access Token: </span>
+                  <span matListItemLine> {{ (userService.token$ | async)?.accessToken }}</span>
+              </mat-list-item>
+              <mat-list-item>
+                <span matListItemTitle>Expires at: </span>
+                <span matListItemLine> {{ (userService.token$ | async)?.tokenExpires }}</span>
+              </mat-list-item>
+            </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+
+
   </mat-sidenav-content>
 </mat-sidenav-container>

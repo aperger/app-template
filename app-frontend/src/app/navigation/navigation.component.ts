@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { UserProfileService } from '../services/user-profile.service';
+import { UserService } from '../services/user.service';
 import { ResourceServerService } from '../services/resource-server.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -19,15 +19,24 @@ export class NavigationComponent {
       shareReplay()
     );
 
+  message = "";
+
   constructor(
     private breakpointObserver: BreakpointObserver, 
-    public userProfileService: UserProfileService, 
+    public userService: UserService, 
     private resourceServer: ResourceServerService) {}
 
   onClickResourceServer() {
-    this.resourceServer.getText("/").subscribe({
-      next: (value: string) => window.alert(value),
-      error: (error: HttpErrorResponse) => console.error(error)
+    console.trace('onClickResourceServer');
+    this.resourceServer.getText("/api/message/welcome").subscribe({
+      next: (value: string) => {
+        this.message = value;
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.statusText + ': ' + error.message);
+        console.error(error);
+      }
     });
   }
+  
 }
