@@ -18,8 +18,7 @@ import { UserProfile, UserService } from './services/user.service';
 
 
 function initializeAppFactory(service: UserService): () => Observable<UserProfile> {
-  // service.updateAccessToken();
-  service.fetchProfile(); // fetch profile and wait for it
+  service.getProfile(); // fetch profile and wait for it
   return () => service.profile$.pipe(take(1)); // take the first only
  }
 

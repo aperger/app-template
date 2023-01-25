@@ -43,11 +43,11 @@
               </mat-list-item>
               <mat-list-item>
                   <span matListItemTitle>Access Token: </span>
-                  <span matListItemLine> {{ (userService.token$ | async)?.accessToken }}</span>
+                  <span matListItemLine> {{ (userService.getUserToken() | async)?.accessToken }}</span>
               </mat-list-item>
               <mat-list-item>
                 <span matListItemTitle>Expires at: </span>
-                <span matListItemLine> {{ (userService.token$ | async)?.tokenExpires }}</span>
+                <span matListItemLine> {{ (userService.getUserToken() | async)?.tokenExpires?.toISOString() }}</span>
               </mat-list-item>
             </mat-list>
       </mat-card-content>
