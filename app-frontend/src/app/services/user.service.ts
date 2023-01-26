@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, last, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, filter, finalize, last, map, Observable, of, share } from 'rxjs';
 
 
 export interface UserProfile {
@@ -47,14 +47,27 @@ export class UserService {
 
   private fetchAccessToken(): Observable<IUserToken>  {
     console.debug("Fetch the access token from backend");
-    return this.http.get<IUserToken>('profile/token')
+    return this.http.get<IUserToken>('profile/token');
   }
 
+  private cachedToneObservable: Observable<UserToken> | null = null;
   public getUserToken(): Observable<UserToken> {
-    if (this.isTokenExpired)  {
-      return this.fetchAccessToken().pipe(map((i: IUserToken) => this.userToken = new UserToken(i)));
+    if (!this.isTokenExpired)  {
+      return of(this.userToken); 
     }
-    return of(this.userToken);
+    
+    let obs: Observable<UserToken>;
+    if (this.cachedToneObservable) {
+      obs = this.cachedToneObservable;
+    } else {
+      this.cachedToneObservable = this.fetchAccessToken()
+        .pipe(
+          share(), // sharable among multiple subscribers
+          finalize(() => this.cachedToneObservable = null) // set the cachedToneObservable to null when the call completes
+        ).pipe(map((i: IUserToken) => this.userToken = new UserToken(i)));
+        obs = this.cachedToneObservable;
+    }
+    return obs;
   }
 
   private subjectProfile = new BehaviorSubject<UserProfile>({email: '', username: '', fullName: ''});

@@ -4,13 +4,13 @@
 
 Sample application secured with OAuth 2.0/OpenID.
 
-The build
+The build:
 
-- The Angular frontend (`app-frontend`) is built into JAR file (`mvn -U clean install`)
+- The Angular frontend (`app-frontend`) is built into JAR file (`mvn -U clean install`), which contains the static resources only
   - configured with `frontend-maven-plugin` and `maven-resources-plugin`
-  - the `index.html` is moved into `/src/main/resources/templates` subdirectory
-  - the rest of the distributable files of compiled Angular project are moved into `/src/main/resources/static` subdirectory
-  - `app-backend` project imports these files as JAR (contains only resources) and use Thymeleaf (`spring-boot-starter-thymeleaf`) to access the resource as view (called `index`)
+  - the `index.html` is moved into `/src/main/resources/templates` sub-directory
+  - the rest of the distributable files of compiled Angular project are moved into `/src/main/resources/static` sub-directory
+  - `app-backend` project depend on this JAR (normal maven dependency) and uses Thymeleaf (`spring-boot-starter-thymeleaf`) to access the resources through a view (called `index`)
 - benefit of this build: the Angular frontend (static) and the Spring Boot application (responsible for security) is bundled into a single deployable solution. Not need to deploy these two project separately (as WebApplication and Static WebApplication)
 - The API endpoint is an external micro-service (https://github.com/aperger/service-template)
   - we can access to these resources with access token which is served by the authorization server
@@ -41,9 +41,9 @@ spring:
 When you execute the application locally (configuration changes are required):
 - you need to start `app-backend` project which will be available on http://localhost:8080
 - you need to login
-- stat the resource server (https://github.com/aperger/service-template) which will be available on http://localhost:8081
-- you can start the Angular project as usual, you can acess to it on http://localhost:4200
-- then you can start your development process on the Angular project
+- start the resource server (https://github.com/aperger/service-template) which will be available on http://localhost:8081
+- you can start the Angular project as usual, you can access to it on http://localhost:4200
+- than you can start your development process on the Angular project (as usual)
 
 The deployed version is available here:
 - https://ps-app-template.azurewebsites.net/login
