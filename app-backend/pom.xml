@@ -10,7 +10,22 @@
   <groupId>hu.ps.templates</groupId>  
   <artifactId>app-backend</artifactId>  
   <version>${parent.version}</version>  
-  <description>Application Template fot OAuth client</description>  
+  <description>Application Template fot OAuth client</description>
+
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- spring boot -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring.boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies> 
     <dependency> 
       <groupId>org.springframework.boot</groupId>  
@@ -23,7 +38,7 @@
     <dependency> 
       <groupId>org.springframework.boot</groupId>  
       <artifactId>spring-boot-starter-oauth2-client</artifactId> 
-    </dependency>  
+    </dependency>
     <dependency> 
       <groupId>org.springframework.boot</groupId>  
       <artifactId>spring-boot-starter-thymeleaf</artifactId> 
