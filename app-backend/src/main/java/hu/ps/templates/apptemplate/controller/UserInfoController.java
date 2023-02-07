@@ -23,13 +23,20 @@ public class UserInfoController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
         var result = new HashMap<String, Object>();
-        result.put("username", oauthToken.getName());
-        result.put("email", oauthToken.getPrincipal().getAttributes().get("email"));
-        String locale = oauthToken.getPrincipal().getAttributes().get("locale").toString();
-        var given_name = oauthToken.getPrincipal().getAttributes().get("given_name");
-        var family_name = oauthToken.getPrincipal().getAttributes().get("family_name");
-        var fullName = "hu".equalsIgnoreCase(locale) ? family_name + " " + given_name : given_name + ", " + family_name;
-        result.put("fullName", fullName);
+        if ("Azure".equalsIgnoreCase(oauthToken.getAuthorizedClientRegistrationId())) {
+            var username = oauthToken.getPrincipal().getAttributes().get("preferred_username");
+            result.put("username", username);
+            result.put("email", username);
+            result.put("fullName", oauthToken.getName());
+        } else if ("PSSecurity".equalsIgnoreCase(oauthToken.getAuthorizedClientRegistrationId())) {
+            result.put("username", oauthToken.getName());
+            result.put("email", oauthToken.getPrincipal().getAttributes().get("email"));
+            String locale = oauthToken.getPrincipal().getAttributes().get("locale").toString();
+            var given_name = oauthToken.getPrincipal().getAttributes().get("given_name");
+            var family_name = oauthToken.getPrincipal().getAttributes().get("family_name");
+            var fullName = "hu".equalsIgnoreCase(locale) ? family_name + " " + given_name : given_name + ", " + family_name;
+            result.put("fullName", fullName);
+        }
         return ResponseEntity.ok(result);
     }
 

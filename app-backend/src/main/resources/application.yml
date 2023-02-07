@@ -3,6 +3,9 @@ keycloak:
   account: ${keycloak.realm}/account
   application-url: https://ps-app-template.azurewebsites.net
 
+azure:
+  tenant-url: https://login.microsoftonline.com/${AZURE_TENANT_ID}
+
 spring:
   security:
     oauth2:
@@ -16,15 +19,28 @@ spring:
             scope: roles, email, profile
             authorization-grant-type: authorization_code
             redirect-uri: ${keycloak.application-url}/login/oauth2/code/pssecurity
+          Azure:
+            # https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2
+            # https://developers.redhat.com/articles/2022/12/07/how-implement-single-sign-out-keycloak-spring-boot#keycloak_configuration
+            client-id: ${AZURE_CLIENT_ID}
+            client-secret: ${AZURE_CLIENT_SECRET}
+            scope: openid, email, profile, api://${AZURE_CLIENT_ID}/access_resources
+            authorization-grant-type: authorization_code
+            redirect-uri: ${keycloak.application-url}/login/oauth2/code/azure
         provider:
           PSSecurity:
             authorization-uri: ${keycloak.realm}/protocol/openid-connect/auth
             token-uri: ${keycloak.realm}/protocol/openid-connect/token
             user-info-uri: ${keycloak.realm}/protocol/openid-connect/userinfo
             user-name-attribute: preferred_username
+          Azure:
+            authorization-uri: ${azure.tenant-url}/oauth2/v2.0/authorize
+            token-uri: ${azure.tenant-url}/oauth2/v2.0/token
+            user-info-uri: https://graph.microsoft.com/oidc/userinfo
+            jwk-set-uri: ${azure.tenant-url}/discovery/v2.0/keys
+            user-name-attribute: name
+
   thymeleaf:
     cache: false
-
-
 
 
