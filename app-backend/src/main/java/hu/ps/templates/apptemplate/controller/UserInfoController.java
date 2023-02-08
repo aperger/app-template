@@ -23,7 +23,7 @@ public class UserInfoController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
         var result = new HashMap<String, Object>();
-        if ("Azure".equalsIgnoreCase(oauthToken.getAuthorizedClientRegistrationId())) {
+        if ("MSLogin".equalsIgnoreCase(oauthToken.getAuthorizedClientRegistrationId())) {
             var username = oauthToken.getPrincipal().getAttributes().get("preferred_username");
             result.put("username", username);
             result.put("email", username);

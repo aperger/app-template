@@ -1,10 +1,18 @@
-keycloak:
-  application-url: http://localhost:8080
+app:
+  url: http://localhost:8080
 spring:
   security:
     oauth2:
       client:
+        ignoreInvalidFields: false
+        ignoreUnknownFields: true
         registration:
           PSSecurity:
             client-id: dummy_client_id
             client-secret: dummy_client_secret
+          MSLogin:
+            client-id: dummy_client_id
+            client-secret: dummy_client_secret
+
+azure:
+  tenant-id: dummy_tenant_id

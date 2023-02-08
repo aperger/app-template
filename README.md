@@ -2,10 +2,14 @@
 ### The application is secured with Spring Boot OAuth 2.0 client
 ##### (Angular frontend - Spring Boot backend)
 
-Sample application secured with OAuth 2.0/OpenID.
+Sample application secured with OAuth 2.0/OpenID. The current configuration uses two authorization server (the URL's are hardcoded)
+  - Keycloak
+  - Microsoft Online/Live
+The users can choose that, which authorization provider will be used.
+
+This application uses an enxternal resouce server([service-template](https://github.com/aperger/service-template)) to get a welcome message. It fires a direct call to this resurce server, so this is an AJX request wich hold an access token in the header. 
 
 The build:
-
 - The Angular frontend (`app-frontend`) is built into JAR file (`mvn -U clean install`), which contains the static resources only
   - configured with `frontend-maven-plugin` and `maven-resources-plugin`
   - the `index.html` is moved into `/src/main/resources/templates` sub-directory
@@ -18,15 +22,19 @@ The build:
   the event is starting when we push changes into `main` branch 
 
 It is possible to run this application locally:
- - The URL of authorization server need change
- - you can set the client id and client secret as environment variable. 
+ - The URL of authorization server mey need change
+ - you can set the client id's and client secrets, and Azure tenant id as environment variables. 
 
 ```yaml
+app:
+  url: http://localhost:8080
 keycloak:
   realm: https://<keycloak-authorizton-server>/auth/realms/<real-name>
   account: ${keycloak.realm}/account
-  application-url: http://localhost:8080
   
+  
+azure:
+  tenant-id: ${AZURE_TENANT_ID}
 
 spring:
   security:
@@ -36,6 +44,10 @@ spring:
           PSSecurity:
             client-id: ${OAUTH_CLIENT_ID}
             client-secret: ${OAUTH_CLIENT_SECRET}
+
+          MSLogin:
+            client-id: ${AZURE_CLIENT_ID}
+            client-secret: ${AZURE_CLIENT_SECRET}
 ```
 
 When you execute the application locally (configuration changes are required):
