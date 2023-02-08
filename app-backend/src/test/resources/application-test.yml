@@ -1,5 +1,5 @@
-keycloak:
-  application-url: http://localhost:8080
+app:
+  url: http://localhost:8080
 spring:
   security:
     oauth2:
@@ -10,6 +10,9 @@ spring:
           PSSecurity:
             client-id: dummy_client_id
             client-secret: dummy_client_secret
+          MSLogin:
+            client-id: dummy_client_id
+            client-secret: dummy_client_secret
 
 azure:
-  tenant-url: https://login.microsoftonline.com/dummy_tenant_id
+  tenant-id: dummy_tenant_id
