@@ -23,8 +23,8 @@ export class NavigationComponent {
   message = "";
 
   constructor(
-    private breakpointObserver: BreakpointObserver, 
-    public userService: UserService, 
+    private breakpointObserver: BreakpointObserver,
+    public userService: UserService,
     private resourceServer: ResourceServerService,
     private apiService: ApiServerService) {}
 
@@ -43,7 +43,7 @@ export class NavigationComponent {
 
   onClickWelcomeProxy() {
     console.trace('onClickServerProxy');
-    this.apiService.getText("/api/messages/welcome").subscribe({
+    this.apiService.getText("/api/message/welcome").subscribe({
       next: (value: string) => {
         this.message = value;
       },
@@ -53,5 +53,5 @@ export class NavigationComponent {
       }
     });
   }
-  
+
 }

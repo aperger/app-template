@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
-@RequestMapping("/api/messages")
+@RequestMapping("/api/message")
 public class MessageController {
 
     private ResourceServerProxy resourceServer1;
