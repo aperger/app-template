@@ -5,7 +5,8 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item (click)="onClickResourceServer()">Call resource server</a>
+      <a mat-list-item (click)="onClickWelcomeAjax()">Welcome message (AJAX)</a>
+      <a mat-list-item (click)="onClickWelcomeProxy()">Welcome message (PROXY)</a>
       <a mat-list-item href="logout">Logout</a>
     </mat-nav-list>
   </mat-sidenav>

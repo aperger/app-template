@@ -7,6 +7,8 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -14,9 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController()
+@RequestMapping("/profile")
 public class UserInfoController {
 
-    @GetMapping("/profile/me")
+    @GetMapping("/me")
     public ResponseEntity<Map<String, Object>> getUserProfile(Authentication authentication) {
         OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
         if (oauthToken == null) {
@@ -41,7 +44,7 @@ public class UserInfoController {
     }
 
 
-    @GetMapping("/profile/token")
+    @GetMapping("/token")
     public ResponseEntity<Map<String, Object>> getUserAccessToken(@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient client) {
         if (client == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);

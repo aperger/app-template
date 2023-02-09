@@ -5,6 +5,9 @@ keycloak:
   realm: https://office.pergersoft.hu/auth/realms/pssecurity
   account: ${keycloak.realm}/account
 
+api:
+  resource1: https://ps-service-api.azurewebsites.net
+
 azure:
   tenant-id: ${AZURE_TENANT_ID}
   tenant-url: https://login.microsoftonline.com/${azure.tenant-id}
