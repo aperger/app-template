@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {delay, last, map, merge, mergeMap, Observable, take} from 'rxjs';
+import { mergeMap, Observable, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserService, UserToken } from './user.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +15,12 @@ export class ResourceServerService {
   ) {
   }
 
-  public get<T>(relativeUrl: string, options? : {params?: HttpParams, headers?: HttpHeaders}): Observable<T> {
+  public get<T>(apiUrl: string, options? : {params?: HttpParams, headers?: HttpHeaders}): Observable<T> {
     let absoluteUrl: string;
-    if (!relativeUrl.startsWith(environment.apiUrl)) {
-      absoluteUrl = environment.apiUrl + relativeUrl;
+    if (!apiUrl.startsWith(environment.apiUrl)) {
+      absoluteUrl = environment.apiUrl + apiUrl;
     } else {
-      absoluteUrl = relativeUrl;
+      absoluteUrl = apiUrl;
     }
 
     return this.userSerive.getUserToken().pipe(take(1)).pipe(
@@ -39,12 +39,12 @@ export class ResourceServerService {
     }));
   }
 
-  public getText(relativeUrl: string, options? : {params?: HttpParams, headers?: HttpHeaders, reponseType?:string}): Observable<string> {
+  public getText(apiUrl: string, options? : {params?: HttpParams, headers?: HttpHeaders, reponseType?:string}): Observable<string> {
     let absoluteUrl: string;
-    if (!relativeUrl.startsWith(environment.apiUrl)) {
-      absoluteUrl = environment.apiUrl + relativeUrl;
+    if (!apiUrl.startsWith(environment.apiUrl)) {
+      absoluteUrl = environment.apiUrl + apiUrl;
     } else {
-      absoluteUrl = relativeUrl;
+      absoluteUrl = apiUrl;
     }
 
     return this.userSerive.getUserToken().pipe(take(1)).pipe(

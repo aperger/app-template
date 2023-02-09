@@ -1,8 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {delay, last, map, merge, mergeMap, Observable, take} from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { UserService, UserToken } from './user.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

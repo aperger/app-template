@@ -43,7 +43,7 @@ export class NavigationComponent {
 
   onClickWelcomeProxy() {
     console.trace('onClickServerProxy');
-    this.apiService.getText("/api/message/welcome").subscribe({
+    this.apiService.getText("api/message/welcome").subscribe({
       next: (value: string) => {
         this.message = value;
       },

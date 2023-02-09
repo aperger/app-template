@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, finalize, last, map, Observable, of, share } from 'rxjs';
+import { BehaviorSubject, filter, finalize, map, Observable, of, share } from 'rxjs';
 
 
 export interface UserProfile {
