@@ -9,7 +9,7 @@
   </parent>  
   <groupId>hu.ps.templates</groupId>  
   <artifactId>app-backend</artifactId>  
-  <version>${parent.version}</version>  
+  <version>${project.parent.version}</version>
   <description>Application Template fot OAuth client</description>
 
 
