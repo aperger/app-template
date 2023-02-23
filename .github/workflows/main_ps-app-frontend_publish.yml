@@ -20,6 +20,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
+        env:
+          # assign the environment variable env.ARTIFACTORY_TOKEN_REF with the previously configured ARTIFACTORY_TOKEN
+          ARTIFACTORY_TOKEN_REF: ${{ secrets.AZURE_DEVOPS_MAVEN_ARTIFACTORY_SECRET }}
+          # assign the environment variable env.ARTIFACTORY_USERNAME_REF with the previously configured ARTIFACTORY_USERNAME
+          ARTIFACTORY_USERNAME_REF: ${{ secrets.AZURE_DEVOPS_MAVEN_ARTIFACTORY_USERNAME }}
 
       - name: Set up our custom Artifactory instance
         uses: actions/setup-java@v1
@@ -33,9 +38,5 @@ jobs:
       - name: Build sand deploy with Maven to private repository
         #run: mvn -B package
         run: cd app-frontend; mvn clean install deploy;
-        env:
-          # assign the environment variable env.ARTIFACTORY_TOKEN_REF with the previously configured ARTIFACTORY_TOKEN
-          ARTIFACTORY_TOKEN_REF: ${{ secrets.AZURE_DEVOPS_MAVEN_ARTIFACTORY_SECRET }}
-          # assign the environment variable env.ARTIFACTORY_USERNAME_REF with the previously configured ARTIFACTORY_USERNAME
-          ARTIFACTORY_USERNAME_REF: ${{ secrets.AZURE_DEVOPS_MAVEN_ARTIFACTORY_USERNAME }}
+
 
