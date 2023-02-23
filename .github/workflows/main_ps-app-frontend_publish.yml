@@ -37,6 +37,6 @@ jobs:
 
       - name: Build and deploy with Maven to private repository
         #run: mvn -B package
-        run: cd app-frontend; mvn clean install deploy;
+        run: cd app-frontend; mvn -B -e -Dmaven.wagon.http.pool=false clean deploy;
 
 
