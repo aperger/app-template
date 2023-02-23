@@ -33,7 +33,6 @@
   <modules>
     <module>app-frontend</module>
     <module>app-backend</module>
-    <!--module>app-service</module-->
   </modules>
 
   <repositories>
