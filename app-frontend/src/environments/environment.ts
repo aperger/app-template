@@ -1,4 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://ps-service-api.azurewebsites.net'
+    apiUrl1: 'https://ps-servlet-api.azurewebsites.net',
+    apiUrl2: 'https://ps-reactive-api.azurewebsites.net'
 };

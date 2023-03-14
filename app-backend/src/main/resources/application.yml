@@ -6,7 +6,8 @@ keycloak:
   account: ${keycloak.realm}/account
 
 api:
-  resource1: https://ps-service-api.azurewebsites.net
+  resource1: https://ps-servlet-api.azurewebsites.net
+  resource2: https://ps-reactive-api.azurewebsites.net
 
 azure:
   tenant-id: ${AZURE_TENANT_ID}

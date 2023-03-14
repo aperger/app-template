@@ -3,4 +3,5 @@ app:
 
 api:
   resource1: http://localhost:8081
+  resource2: http://localhost:8082
 

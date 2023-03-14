@@ -12,13 +12,13 @@ public class ResourceServerProxy {
 
     public static final String AUTHORIZATION = "Authorization";
 
-    @Value("${api.resource1}")
     private String resourceServerURL;
 
     private final RestTemplate restTemplate;
     public ResourceServerProxy(
             String resourceServerURL,
             RestTemplate restTemplate) {
+        this.resourceServerURL = resourceServerURL;
         this.restTemplate = restTemplate;
     }
 

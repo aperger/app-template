@@ -6,26 +6,26 @@
 
   <groupId>hu.ps.templates</groupId>
   <artifactId>app-template</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1-SNAPSHOT</version>
   <name>app-template</name>
   <packaging>pom</packaging>
   <!-- FIXME change it to the project's website -->
   <url>https://github.com/aperger/app-template</url>
   <description>Template for SpringBoot Web application with OAuth client</description>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.0.4</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <java.version>17</java.version>
-    <spring.boot.version>3.0.1</spring.boot.version>
+    <spring.boot.version>3.0.4</spring.boot.version>
     <lombok.version>1.18.20</lombok.version>
     <jackson.datatype.version>2.14.1</jackson.datatype.version>
   </properties>
@@ -33,11 +33,32 @@
   <modules>
     <module>app-frontend</module>
     <module>app-backend</module>
-    <!--module>app-service</module-->
   </modules>
 
-  <dependencies>
-  </dependencies>
+  <repositories>
+    <repository>
+      <id>pergersoft</id>
+      <url>https://pergersoft.pkgs.visualstudio.com/_packaging/pergersoft/maven/v1</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <distributionManagement>
+    <repository>
+      <id>pergersoft</id>
+      <url>https://pergersoft.pkgs.visualstudio.com/_packaging/pergersoft/maven/v1</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </distributionManagement>
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
