@@ -3,7 +3,7 @@
 
 # https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-maven
 
-name: Publish package to the Azure Organization Repository
+name: Publish app-frontend package to the Azure Organization Repository
 on:
   release:
     types: [created]
