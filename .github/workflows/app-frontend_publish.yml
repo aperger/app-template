@@ -25,5 +25,5 @@ jobs:
       - name: Publish package
         run: cd app-frontend; mvn --batch-mode deploy;
         env:
-          MAVEN_USERNAME: ${{ secrets.AZURE_DEVOPS_MAVEN_ARTIFACTORY_SECRET }}
-          MAVEN_PASSWORD: ${{ secrets.AZURE_DEVOPS_MAVEN_ARTIFACTORY_USERNAME }}
+          MAVEN_USERNAME: ${{ secrets.AZURE_DEVOPS_MAVEN_ARTIFACTORY_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.AZURE_DEVOPS_MAVEN_ARTIFACTORY_SECRET }}
