@@ -30,7 +30,7 @@ public class MessageController {
 
     @GetMapping("/welcome2")
     public ResponseEntity<String> getWelcomeMessage2(@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient client) {
-        return resourceServer1.callEndPoint(client, "/api/message/welcome", String.class);
+        return resourceServer2.callEndPoint(client, "/api/message/welcome", String.class);
     }
 
 
