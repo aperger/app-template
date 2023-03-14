@@ -5,8 +5,14 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item (click)="onClickWelcomeAjax()">Welcome message (AJAX)</a>
-      <a mat-list-item (click)="onClickWelcomeProxy()">Welcome message (PROXY)</a>
+      <div mat-subheader><h4>Servlet API calls</h4></div>
+      <a mat-list-item (click)="onClickWelcomeAjax1()">Welcome with AJAX</a>
+      <a mat-list-item (click)="onClickWelcomeProxy1()">Welcome with PROXY</a>
+      <mat-divider></mat-divider>
+      <div mat-subheader><h4>Reactive API calls</h4></div>
+      <a mat-list-item (click)="onClickWelcomeAjax2()">Welcome with AJAX</a>
+      <a mat-list-item (click)="onClickWelcomeProxy2()">Welcome with PROXY</a>
+      <mat-divider></mat-divider>
       <a mat-list-item href="logout">Logout</a>
     </mat-nav-list>
   </mat-sidenav>

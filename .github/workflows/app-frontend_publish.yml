@@ -1,0 +1,29 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+# https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-maven
+
+name: Publish app-frontend package to the Azure Organization Repository
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Azure Organization Repository
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+          server-id: pergersoft
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+      - name: Publish package
+        run: cd app-frontend; mvn --batch-mode deploy;
+        env:
+          MAVEN_USERNAME: ${{ secrets.AZURE_DEVOPS_MAVEN_ARTIFACTORY_SECRET }}
+          MAVEN_PASSWORD: ${{ secrets.AZURE_DEVOPS_MAVEN_ARTIFACTORY_USERNAME }}
