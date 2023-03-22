@@ -10,7 +10,7 @@
 
 	<groupId>hu.ps.templates</groupId>
 	<artifactId>app-frontend</artifactId>
-	<version>${project.parent.version}</version>
+	<version>1.2-SNAPSHOT</version>
 
 	<properties>
 		<sonar.skip>true</sonar.skip>

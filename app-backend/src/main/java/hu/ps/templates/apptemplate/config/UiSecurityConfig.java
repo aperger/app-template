@@ -36,6 +36,8 @@ public class UiSecurityConfig {
                 + "&post%5Flogout%5Fredirect%5Furi=" + applicationUrl + "/login";
 
         http.cors().and().authorizeHttpRequests()
+                .requestMatchers("/manifest.webmanifest**").permitAll()
+                .requestMatchers("/ngsw.json**").permitAll()
                 .requestMatchers("/favicon.ico").permitAll()
                 .requestMatchers("/*.js").permitAll()
                 .requestMatchers("/*.css").permitAll()
@@ -53,6 +55,7 @@ public class UiSecurityConfig {
                 .anyRequest().authenticated()
                 .and()
                     .oauth2Login()
+                    // .defaultSuccessUrl("/", true)
                 .and()
                     .logout()
                 .logoutSuccessHandler(new MultiTenantLogoutSuccessHandler(keycloakLogoutUrl, msLogoutUrl))
