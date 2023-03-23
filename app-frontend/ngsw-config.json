@@ -57,7 +57,7 @@
     },
     {
       "name": "no-cache",
-      "urls": ["/login**", "/logout**", "/oauth2/**"],
+      "urls": ["/login**", "/logout**", "/oauth2/**", "/profile/**"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 0,
