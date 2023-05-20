@@ -15,7 +15,8 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable, take } from 'rxjs';
 import { UserProfile, UserService } from './services/user.service';
-import { ServiceWorkerModule } from '@angular/service-worker';
+// revert of "ng add @angular/pwa"
+// import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 function initializeAppFactory(service: UserService): () => Observable<UserProfile> {
@@ -40,12 +41,14 @@ function initializeAppFactory(service: UserService): () => Observable<UserProfil
     MatIconModule,
     MatListModule,
     MatCardModule,
+    /* revert of "ng add @angular/pwa"
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    */
   ],
   providers: [{
     provide: APP_INITIALIZER,
