@@ -27,7 +27,17 @@
       }
     }
   ],
-  "navigationRequestStrategy": "freshness",
+  "navigationUrls": [
+    "/**",
+    "!/**/login/**",
+    "!/**/login",
+    "!/logout",
+    "!/**/logout",
+    "!/**/*.*",
+    "!/**/*__*",
+    "!/**/*__*/**"
+  ],
+  "navigationRequestStrategy": "performance",
   "dataGroups": [
     {
       "name": "ajax-ps-servlet-api",
@@ -35,7 +45,7 @@
       "cacheConfig": {
         "strategy": "performance",
         "maxSize": 100,
-        "maxAge": "5m"
+        "maxAge": "1m"
       }
     },
     {
@@ -44,7 +54,7 @@
       "cacheConfig": {
         "strategy": "performance",
         "maxSize": 100,
-        "maxAge": "5m"
+        "maxAge": "2m"
       }
     },
     {
