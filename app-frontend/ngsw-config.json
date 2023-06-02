@@ -33,6 +33,7 @@
     "!/**/login",
     "!/logout",
     "!/**/logout",
+    "!/profile/**",
     "!/oauth2/authorization/**",
     "!/**/*.*",
     "!/**/*__*",
