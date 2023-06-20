@@ -29,7 +29,8 @@ public class UiSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        final String keycloakLogoutUrl = keyCloakRealm + "/protocol/openid-connect/logout?redirect_uri=" + applicationUrl + "/logout";
+        final String keycloakLogoutUrl = keyCloakRealm + "/protocol/openid-connect/logout?"
+                + "post%5Flogout%5Fredirect%5Furi=" + applicationUrl + "/login";
 
         final String msLogoutUrl =  "https://login.microsoftonline.com/common/oauth2/logout?"
                 + "client%5Fid=" + msClientId + "&response%5Fmode=form%5Fpost"

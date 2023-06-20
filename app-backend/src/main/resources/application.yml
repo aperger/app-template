@@ -26,7 +26,7 @@ spring:
             # https://developers.redhat.com/articles/2022/12/07/how-implement-single-sign-out-keycloak-spring-boot#keycloak_configuration
             client-id: ${OAUTH_CLIENT_ID}
             client-secret: ${OAUTH_CLIENT_SECRET}
-            scope: roles, email, profile
+            scope: openid, roles, email, profile
             authorization-grant-type: authorization_code
             redirect-uri: ${app.url}/login/oauth2/code/pssecurity
           MSLogin:
@@ -42,6 +42,7 @@ spring:
             authorization-uri: ${keycloak.realm}/protocol/openid-connect/auth
             token-uri: ${keycloak.realm}/protocol/openid-connect/token
             user-info-uri: ${keycloak.realm}/protocol/openid-connect/userinfo
+            jwk-set-uri: ${keycloak.realm}/protocol/openid-connect/certs
             user-name-attribute: preferred_username
           MSLogin:
             authorization-uri: ${azure.tenant-url}/oauth2/v2.0/authorize
