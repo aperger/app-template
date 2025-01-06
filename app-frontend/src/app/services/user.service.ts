@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, finalize, map, Observable, of, share } from 'rxjs';
+import { BehaviorSubject, catchError, filter, finalize, map, Observable, of, share } from 'rxjs';
 
 
 export interface UserProfile {
@@ -8,7 +8,7 @@ export interface UserProfile {
   email: string;
   fullName: string;
 }
-  
+
 export interface IUserToken {
   accessToken: string;
   tokenExpires: string;
@@ -53,21 +53,30 @@ export class UserService {
   private cachedToneObservable: Observable<UserToken> | null = null;
   public getUserToken(): Observable<UserToken> {
     if (!this.isTokenExpired)  {
-      return of(this.userToken); 
+      return of(this.userToken);
     }
-    
-    let obs: Observable<UserToken>;
+
     if (this.cachedToneObservable) {
-      obs = this.cachedToneObservable;
-    } else {
-      this.cachedToneObservable = this.fetchAccessToken()
+      return this.cachedToneObservable;
+    }
+
+    this.cachedToneObservable = this.fetchAccessToken()
         .pipe(
           share(), // sharable among multiple subscribers
-          finalize(() => this.cachedToneObservable = null) // set the cachedToneObservable to null when the call completes
-        ).pipe(map((i: IUserToken) => this.userToken = new UserToken(i)));
-        obs = this.cachedToneObservable;
-    }
-    return obs;
+          catchError(err => {
+            const userToken: IUserToken = {
+              accessToken: '',
+              tokenExpires: ''
+            };
+            return of(userToken);
+          }),
+          finalize(() => this.cachedToneObservable = null), // set the cachedToneObservable to null when the call completes
+        )
+        .pipe(
+          map((i: IUserToken) => this.userToken = new UserToken(i)),
+
+        );
+    return this.cachedToneObservable;
   }
 
   private subjectProfile = new BehaviorSubject<UserProfile>({email: '', username: '', fullName: ''});
@@ -82,10 +91,13 @@ export class UserService {
     map(profile => profile as UserProfile)
   );
 
-  public getProfile(): void  {    
+  public getProfile(): void  {
     this.fetchProfile().subscribe({
       next: (userProfile: UserProfile) => this.subjectProfile.next(userProfile),
-      error: (error: HttpErrorResponse) => console.error(error)
+      error: (error: HttpErrorResponse) => {
+        console.error(error);
+        document.location.href = './login';
+      }
     });
   }
 
